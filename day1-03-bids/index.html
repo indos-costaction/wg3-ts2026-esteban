@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BIDS across modalities | INDoS WG3 Training School 2026</title>
+    <meta charset="utf-8">
+    <meta name="grammarly" content="false">
+    <meta name="google" content="notranslate">
+    <link rel="icon" type="image/png" href="../assets/indos-brain.png" />
+    <link rel="stylesheet" type="text/css" href="../remark/vendor/asciinema-player/asciinema-player.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/core/base.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/themes/indos.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/ext/nav-controls.css" />
+  </head>
+  <body>
+<style>
+/* The URL resolves against remark/core/base.css, where var(--logo-url) is
+   used, not against this page: hence two levels up. */
+:root { --logo-url: url("../../assets/indos-logo-left.png"); }
+
+/* File trees: one entry per line, indented by nesting depth. */
+.tree {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: nowrap;
+  margin-top: 0.4em;
+}
+.tree .d1 { padding-left: 1.4em; }
+.tree .d2 { padding-left: 2.8em; }
+.tree .d3 { padding-left: 4.2em; }
+.tree .d4 { padding-left: 5.6em; }
+.tree .fa-solid { width: 1.2em; text-align: center; margin-right: 0.35em; }
+.tree .gray-text .fa-solid { color: #aaa; }
+.tree mark { background: #fdf0c8; padding: 0 2px; }
+
+.tree.lg { font-size: 14px; }
+
+/* Code excerpts from ds000117 are long: smaller type, tighter leading. */
+.code-m .remark-code { font-size: 15px; line-height: 1.4; }
+.code-s .remark-code { font-size: 13px; line-height: 1.35; }
+.code-xs .remark-code { font-size: 11.5px; line-height: 1.3; }
+.code-m pre, .code-s pre, .code-xs pre { margin: 0.4em 0; }
+/* Plain-text blocks (tool output, TSV) skip highlighting, and with it the
+   .hljs class that carries the monokai panel: restore the panel. */
+pre > code.remark-code:not(.hljs) {
+  display: block;
+  padding: 0.5em;
+  background: #272822;
+  color: #f8f8f2;
+}
+.code-label { font-size: 0.65em; color: #666; margin: 0.6em 0 0 0; }
+.code-label code { font-size: 0.95em; }
+
+/* Metadata steps next to the tree: three blocks must fit under the band. */
+.meta-steps { font-size: 0.9em; }
+.meta-steps code { font-size: 0.75em; }
+
+/* Filename anatomy: one entity per card, set in the code face; the task
+   label is the long one, so its column gets the extra width. */
+.cards.anatomy { grid-template-columns: 1fr 1.1fr 1.6fr 1fr 1.15fr; }
+.entity { font-family: 'Roboto Mono', monospace; font-size: 0.8em; }
+.filename {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.05em;
+  margin: 0.8em 0 0.2em 0;
+}
+.filename b { font-weight: 700; }
+.filename .e1 { color: var(--indos-turquoise); }
+.filename .e2 { color: var(--indos-orange); }
+.filename .e3 { color: var(--indos-lavender); }
+.filename .e4 { color: var(--indos-purple); }
+.filename .e5 { color: var(--indos-navy); }
+
+/* Screenshots of the BIDS Apps registry start below the logo. */
+.apps-shot { padding-top: 55px; }
+</style>
+<script src="../remark/vendor/asciinema-player/asciinema-player.min.js"></script>
+<script src="https://kit.fontawesome.com/015d4b01de.js" crossorigin="anonymous"></script>
+
+<textarea id="source">
+name: title
+layout: true
+class: cover, indos-cover, no-logo
+
+---
+count: false
+
+.cover-band[
+<img class="lockup" src="../assets/indos-logo-left-white.png" alt="INDoS" />
+
+.eyebrow[WG3 Training School &middot; Madrid 2026]
+
+# BIDS across modalities
+
+### Structure, validation, the EEG/MEG extensions, BIDS Apps
+
+.who[Oscar Esteban &lt;oscar.esteban@hevs.ch&gt;<br />HES-SO Valais-Wallis &middot; 30.09.2026]
+
+<div class="mosaic"></div>
+]
+
+.cover-side[
+<a href="https://www.indos-costaction.eu/wg3-ts2026-esteban/day1-03-bids/">
+  <object type="image/svg+xml" data="images/qr-talk-url.svg"></object>
+  <br />
+  www.indos-costaction.eu/wg3-ts2026-esteban/day1-03-bids/
+</a>
+]
+
+.cover-logos[
+<img src="../assets/cost-logo-darkgrey.png" alt="COST" /> <img src="../assets/eu-funded-pos.png" alt="Funded by the European Union" />
+]
+
+???
+
+30 minutes, theory only. The running example is OpenNeuro ds000117 (Wakeman and Henson):
+the same 16 participants scanned once with MRI and once with MEG plus simultaneous EEG.
+One dataset, two sessions, three modalities: it lets us see what is common to every
+BIDS dataset and what the MEG/EEG extensions add.
+
+Hands-on follows at 11:30.
+
+---
+name: newsection
+layout: true
+
+.perma-sidebar[
+<p class="rotate">
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0; height: 20px; padding-top: 6px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  <span style="padding-left: 10px; font-weight: 600;">INDoS WG3 Training School &middot; BIDS across modalities (30.09.2026)</span>
+</p>
+]
+
+---
+class: vcenter
+
+.boxed-content.center[
+.larger.gray-text[Before we start...]
+
+## What do you know about BIDS?
+
+.gray-text[Have you used it? Converted data into it? Shared a dataset on OpenNeuro?<br />Run a BIDS App?]
+]
+
+???
+
+Quick show of hands, two minutes at most. Calibrate the rest of the talk:
+if most people have converted data before, go faster over the directory structure
+and spend the time on the MEG/EEG slides and the BIDS Apps.
+
+---
+layout: true
+template: newsection
+name: tree
+
+# BIDS: Brain Imaging Data Structure
+
+.left-column-mid[
+<div class="tree">
+<div><i class="fa-solid fa-folder-open"></i> ds000117/</div>
+<div class="d1"><i class="fa-solid fa-file-lines"></i> CHANGES, README</div>
+<div class="d1"><i class="fa-solid fa-paperclip"></i> dataset_description.json</div>
+<div class="d1"><i class="fa-solid fa-table"></i> participants.tsv, participants.json</div>
+<div class="d1"><i class="fa-solid fa-paperclip"></i> task-facerecognition_bold.json</div>
+<div class="d1"><i class="fa-solid fa-paperclip"></i> task-facerecognition_meg.json</div>
+<div class="d1"><i class="fa-solid fa-folder-open"></i> sub-01/</div>
+<div class="d2"><i class="fa-solid fa-folder-open"></i> ses-meg/</div>
+<div class="d3"><i class="fa-solid fa-folder-open"></i> meg/</div>
+<div class="d4"><i class="fa-solid fa-sliders"></i> sub-01_ses-meg_acq-calibration_meg.dat</div>
+<div class="d4"><i class="fa-solid fa-sliders"></i> sub-01_ses-meg_acq-crosstalk_meg.fif</div>
+<div class="d4"><i class="fa-solid fa-paperclip"></i> sub-01_ses-meg_coordsystem.json</div>
+<div class="d4"><i class="fa-solid fa-table"></i> sub-01_ses-meg_task-facerecognition_run-01_channels.tsv</div>
+<div class="d4"><i class="fa-solid fa-table"></i> sub-01_ses-meg_task-facerecognition_run-01_events.tsv</div>
+<div class="d4"><i class="fa-solid fa-wave-square"></i> sub-01_ses-meg_task-facerecognition_run-01_meg.fif</div>
+<div class="d4"><i class="fa-solid fa-paperclip"></i> sub-01_ses-meg_task-facerecognition_run-01_meg.json</div>
+<div class="d4 gray-text"><i class="fa-solid fa-ellipsis"></i> runs 02 to 06</div>
+<div class="d3"><i class="fa-solid fa-table"></i> sub-01_ses-meg_scans.tsv</div>
+<div class="d2"><i class="fa-solid fa-folder-open"></i> ses-mri/</div>
+<div class="d3"><i class="fa-solid fa-folder-open"></i> anat/</div>
+<div class="d4"><i class="fa-solid fa-brain"></i> sub-01_ses-mri_T1w.nii.gz, sub-01_ses-mri_T1w.json</div>
+<div class="d3"><i class="fa-solid fa-folder-open"></i> fmap/</div>
+<div class="d4"><i class="fa-solid fa-brain"></i> sub-01_ses-mri_acq-func_phasediff.nii.gz</div>
+<div class="d4 gray-text"><i class="fa-solid fa-ellipsis"></i> magnitude1, magnitude2, and their sidecars</div>
+<div class="d3"><i class="fa-solid fa-folder-open"></i> func/</div>
+<div class="d4"><i class="fa-solid fa-brain"></i> sub-01_ses-mri_task-facerecognition_run-01_bold.nii.gz</div>
+<div class="d4"><i class="fa-solid fa-table"></i> sub-01_ses-mri_task-facerecognition_run-01_events.tsv</div>
+<div class="d4 gray-text"><i class="fa-solid fa-ellipsis"></i> runs 02 to 09</div>
+<div class="d1 gray-text"><i class="fa-solid fa-folder"></i> sub-02/ ... sub-16/</div>
+<div class="d1"><i class="fa-solid fa-folder"></i> sub-emptyroom/</div>
+</div>
+]
+
+---
+
+.right-column-mid.larger[
+
+* BIDS is a directory structure, based on common practices
+
+* Builds on existing standards (NIfTI, JSON, TSV) and keeps M/EEG in its native formats (here, MEGIN/Elekta `.fif`)
+
+* Intended for human *and* machine legibility
+
+* The [BIDS Validator](https://bids-standard.github.io/bids-validator/)
+  makes compliance easy to verify
+
+* The [specification](https://bids-specification.readthedocs.io/en/stable/)
+  is a searchable HTML document
+]
+
+???
+
+This is the real layout of OpenNeuro ds000117, trimmed: 16 participants, each with an MRI session
+(T1w, field maps, nine fMRI runs) and a MEG session (six runs, with EEG recorded simultaneously
+by the same MEG system), plus a `sub-emptyroom` pseudo-subject with the empty-room noise recordings.
+
+Nothing here is exotic: folders, file names, JSON and TSV.
+The only binary blobs are the NIfTI images and the FIF recordings.
+
+---
+
+.right-column-mid.meta-steps[.no-bullet[* .larger[Basic metadata in the file names]
+  * Subject, session, task, run, data type...
+  * Generally just enough to assign unique names]]
+--
+.right-column-mid.meta-steps[.no-bullet[* .larger[JSON sidecars (and NIfTI headers)]
+  * Recording-specific metadata
+  * `_meg.json`: `SamplingFrequency`, `PowerLineFrequency`...]]
+--
+.right-column-mid.meta-steps[.no-bullet[* .larger[Study-level metadata]
+  * [`dataset_description.json`](https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/dataset-description.html),
+    [`participants.tsv`](https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/data-summary-files.html#participants-file),
+    [`scans.tsv`](https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/data-summary-files.html#scans-file)
+  * Shared metadata moves up the tree: `task-facerecognition_meg.json`
+]]
+
+???
+
+Three levels of metadata, from the most specific to the most general.
+The last bullet is the inheritance principle, which the next two slides unpack.
+
+---
+layout: true
+template: newsection
+
+---
+
+# Anatomy of a BIDS filename
+
+.boxed-content[
+<div class="filename center">sub-01/ses-meg/meg/<b class="e1">sub-01</b>_<b class="e2">ses-meg</b>_<b class="e3">task-facerecognition</b>_<b class="e4">run-01</b>_<b class="e5">meg.fif</b></div>
+]
+
+.cards.anatomy.brand[
+.card[
+.kicker[entity]
+### .entity[sub-01]
+Subject label, also the first folder level.
+]
+.card[
+.kicker[entity]
+### .entity[ses-meg]
+Session label: the MEG visit (vs. `ses-mri`).
+]
+.card[
+.kicker[entity]
+### .entity[task-facerecognition]
+What the participant was doing. Links to `task-facerecognition_meg.json`.
+]
+.card[
+.kicker[entity]
+### .entity[run-01]
+Repetitions of the same task in the same session.
+]
+.card[
+.kicker[suffix + extension]
+### .entity[_meg.fif]
+The kind of data (`meg`, `bold`, `T1w`, `channels`...) and its file format.
+]
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> `key-value` pairs joined by `_`, in the order fixed by the specification. Same entities on the MRI side: `sub-01_ses-mri_task-facerecognition_run-01_bold.nii.gz`
+]
+
+???
+
+Entities are key-value pairs. The order is fixed by the specification, which is what lets
+tools parse names without guessing. The folder path repeats `sub` and `ses`, and adds the
+data type folder (`meg/`, `anat/`, `func/`, `fmap/`).
+
+---
+
+# JSON sidecars and inheritance
+
+.boxed-content[
+.pull-left.code-xs[
+.code-label[`task-facerecognition_meg.json` (dataset root)]
+```JSON
+{
+    "TaskName": "facerecognition",
+    "TaskDescription": "Subjects viewed stimuli on a
+        screen during six, 7.5 minute runs. [...]",
+    "Manufacturer": "Elekta",
+    "PowerLineFrequency": 50.0,
+    "SamplingFrequency": 1100.0,
+    ...
+    "RecordingDuration": 493.9990909090909,
+    ...
+    "MEGChannelCount": 306,
+    ...
+    "EEGChannelCount": 70,
+    ...
+}
+```
+]
+
+.pull-right.code-xs[
+.code-label[`sub-01_ses-meg_task-facerecognition_run-01_meg.json`]
+```JSON
+{
+    "TaskName": "facerecognition",
+    "Manufacturer": "Elekta",
+    "PowerLineFrequency": 50.0,
+    "SamplingFrequency": 1100.0,
+    ...
+    "RecordingDuration": 490.9990909090909,
+    ...
+    "MEGChannelCount": 306,
+    ...
+    "AssociatedEmptyRoom": "sub-emptyroom/ses-19110112/meg/
+        sub-emptyroom_ses-19110112_task-noise_meg.fif",
+    "EEGChannelCount": 70,
+    ...
+}
+```
+]
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> `TaskDescription` only exists at the root, yet applies to every `_meg.json` of the task. `RecordingDuration` is set twice: the file closest to the data wins (490.999 s).
+]
+
+???
+
+Verbatim excerpts from ds000117 (dots mark omitted keys; the two long strings are wrapped for the slide).
+
+The inheritance principle: a sidecar placed higher in the tree applies to every data file below it
+whose name matches. Here, the root-level `task-facerecognition_meg.json` carries the task description
+once for 96 MEG runs. When the same key appears at both levels, the value closest to the data applies:
+PyBIDS returns 490.999 s for sub-01 run-01.
+
+The current validator warns about such overrides (SIDECAR_FIELD_OVERRIDE, next slides):
+inheritance is meant for sharing values, not for silently redefining them.
+
+---
+
+# Study-level metadata
+
+.boxed-content[
+.pull-left.code-xs[
+.code-label[`dataset_description.json`]
+```JSON
+{
+    "Name": "Multisubject, multimodal face processing",
+    "License": "CC0",
+    "Authors": [
+        "Wakeman, DG",
+        "Apšvalka, D",
+        "Henson, RN"
+    ],
+    "Acknowledgements": "This work was supported by
+        the UK Medical Research Council (SUAG/010\nRG91365)
+        and Elekta Ltd.",
+    "HowToAcknowledge": "Cite this paper: [...]",
+    "Funding": [
+        "UK Medical Research Council (SUAG/010 RG91365),
+            Elekta Ltd."
+    ],
+    "ReferencesAndLinks": [ ... ],
+    "BIDSVersion": "1.8.0",
+    "DatasetDOI": "doi:10.18112/openneuro.ds000117.v2.0.0"
+}
+```
+]
+
+.pull-right.code-xs[
+.code-label[`participants.tsv` (first rows)]
+```no-highlight
+participant_id  age     sex     first_ses
+sub-01          31      M       meg
+sub-02          25      M       meg
+sub-03          30      M       meg
+sub-04          26      F       meg
+...
+```
+
+.code-label[`participants.json`]
+```JSON
+{
+  "participant_id": {
+    "Description": "Participant identifier"
+  },
+  "age": {
+    "Description": "Age in years for the first session"
+  },
+  ...
+  "first_ses": {
+    "Description": "Which of MEG/MRI session they did first"
+  }
+}
+```
+]
+]
+
+???
+
+`dataset_description.json` is the only file that is REQUIRED at the root. Name, license,
+authors, how to cite, and which BIDS version the dataset follows.
+
+`participants.tsv` has one row per participant, with columns described in `participants.json`.
+Here `first_ses` records which session (MEG or MRI) each participant did first.
+
+`scans.tsv` (not shown) lists every recording of a session with its acquisition time,
+e.g., `sub-01/ses-meg/sub-01_ses-meg_scans.tsv`. Its dates (1911) are what is stored in the
+dataset, not the real acquisition dates.
+
+---
+
+# A decade of BIDS
+
+.boxed-content.center[
+<figure style="width: 82%; margin-top: 0">
+![:img BIDS history timeline from 2015 to 2026, 100%](images/timeline.png)
+</figure>
+]
+
+???
+
+A decade of community work: from the initial meeting in 2015 and the MRI paper in 2016 to
+the extensions for MEG, EEG, iEEG, PET, microscopy, motion, NIRS, MRS...
+
+Governance matured along the way: a steering group, maintainers, and the BIDS schema,
+which is what drives the validator today.
+
+---
+
+# Wide adoption
+
+.boxed-content.center[
+<figure style="width: 72%">
+![:img Growth of datasets and subjects published on OpenNeuro, 100%](images/combined_growth.png)
+<figcaption>Datasets (green) and subjects (red) published on OpenNeuro</figcaption>
+</figure>
+]
+
+???
+
+OpenNeuro only accepts BIDS datasets, so its growth is a lower bound on BIDS adoption.
+
+---
+class: vcenter
+
+# One standard, many modalities
+
+.cards.cols-5.brand[
+.card[
+.kicker[2016]
+### MRI
+Gorgolewski et al.
+.foot[[Sci Data](https://doi.org/10.1038/sdata.2016.44)]
+]
+.card.accent[
+.kicker[2018]
+### MEG
+Niso et al.
+.foot[[Sci Data](https://doi.org/10.1038/sdata.2018.110)]
+]
+.card[
+.kicker[2019]
+### EEG
+Pernet et al.
+.foot[[Sci Data](https://doi.org/10.1038/s41597-019-0104-8)]
+]
+.card[
+.kicker[2019]
+### iEEG
+Holdgraf et al.
+.foot[[Sci Data](https://doi.org/10.1038/s41597-019-0105-7)]
+]
+.card[
+.kicker[2022]
+### PET
+Norgaard et al.
+.foot[[Sci Data](https://doi.org/10.1038/s41597-022-01164-1)]
+]
+]
+
+.boxed-content[
+And more:
+[ASL](https://doi.org/10.1038/s41597-022-01615-9) (2022),
+[qMRI](https://doi.org/10.1038/s41597-022-01571-4) (2022),
+[microscopy](https://doi.org/10.3389/fnins.2022.871228) (2022),
+[motion](https://doi.org/10.1038/s41597-024-03559-8) (2024),
+[NIRS](https://doi.org/10.1038/s41597-024-04136-9) (2025)...
+Tools got their own paper too: [BIDS Apps](https://doi.org/10.1371/journal.pcbi.1005209) (2017).
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> MEG-BIDS first author: **Guiomar Niso**, INDoS Vice-Chair and our host at CSIC
+]
+
+???
+
+Years are those of the journal publications (all verified through their DOIs).
+The timeline figure on the previous slide gives a different year for a couple of them
+(motion, NIRS): trust the DOIs.
+
+The MEG extension came first among the electrophysiology modalities, and it was led by
+Guiomar Niso, who is hosting us here in Madrid.
+
+---
+
+# The MEG and EEG extensions
+
+.cards.cols-3[
+.card[
+.section-icon.corner[<i class="fa-solid fa-wave-square"></i>]
+
+.kicker[native formats]
+
+### Raw formats
+Data stay in the manufacturer's format.
+
+* MEG: `.fif` (MEGIN/Elekta), `.ds/` (CTF), `.sqd`/`.con` (KIT/Yokogawa/Ricoh)...
+* EEG: `.edf`, `.bdf`, BrainVision (`.vhdr`, `.vmrk`, `.eeg`), EEGLAB (`.set`, `.fdt`)
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-paperclip"></i>]
+
+.kicker[per recording]
+
+### Sidecars
+* `_meg.json` / `_eeg.json`
+* `_channels.tsv`
+* `_events.tsv`
+* `_coordsystem.json`
+* `_electrodes.tsv`, `_headshape`...
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-magnet"></i>]
+
+.kicker[MEG specifics]
+
+### Beyond the recording
+* Empty-room noise recordings (`sub-emptyroom`, `task-noise`)
+* Fine-calibration and cross-talk files (MEGIN/Elekta)
+* EEG from the MEG system MAY live inside the MEG file, under `meg/`
+]
+]
+
+???
+
+The key design decision of MEG-BIDS and EEG-BIDS: keep the raw data in the native formats
+(the software ecosystem reads them well) and standardize everything around them.
+
+EEG recorded with a separate amplifier goes under its own `eeg/` folder.
+EEG recorded by the same MEG system (as in ds000117) MAY stay in the MEG file, under `meg/`,
+with the EEG channels listed in `_channels.tsv`.
+
+The next two slides show each of these files in ds000117.
+
+---
+
+# Channels and events
+
+.boxed-content.code-xs[
+.code-label[`sub-01_ses-meg_task-facerecognition_run-01_channels.tsv` (excerpt, columns aligned)]
+```no-highlight
+name     type           units  low_cutoff  high_cutoff        description           sampling_frequency  status  status_description
+MEG0113  MEGGRADPLANAR  T/m    0.0         356.3999938964844  Planar Gradiometer    1100.0              good    n/a
+MEG0111  MEGMAG         T      0.0         356.3999938964844  Magnetometer          1100.0              good    n/a
+...
+EEG001   EEG            V      0.0         356.3999938964844  ElectroEncephaloGram  1100.0              good    n/a
+...
+EOG061   EOG            V      0.0         356.3999938964844  ElectroOculoGram      1100.0              good    n/a
+ECG063   ECG            V      0.0         356.3999938964844  ElectroCardioGram     1100.0              good    n/a
+STI101   TRIG           V      0.0         356.3999938964844  Trigger               1100.0              good    n/a
+```
+
+.code-label[`sub-01_ses-meg_task-facerecognition_run-01_events.tsv` (first rows)]
+```no-highlight
+onset    duration  trial_type  value  sample  stim_file
+24.2064  0.0       IniUF       13     26627   meg/u032.bmp
+25.1209  0.0       btnL        256    27633   n/a
+27.2464  0.0       ImmUF       14     29971   meg/u032.bmp
+36.5527  0.0       IniFF       5      40208   meg/f123.bmp
+...
+```
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> One FIF file, 395 channels: 306 MEG (204 gradiometers, 102 magnetometers), **70 EEG**, 2 EOG, 1 ECG, 13 MISC, 3 trigger
+]
+
+???
+
+`_channels.tsv`: one row per channel, with type, units, filters and status (good/bad).
+The simultaneous EEG channels sit in the same FIF file and are simply listed with type EEG.
+Marking bad channels here (status = bad) is how you hand that information to downstream tools.
+
+`_events.tsv`: onset and duration in seconds (REQUIRED), plus any other column you document
+in the matching `_events.json`. Here `trial_type` codes the nine conditions (IniFF = initial
+famous face, ImmUF = immediate repeat of an unfamiliar face...) and the button presses,
+`stim_file` points into the `stimuli/` folder.
+
+---
+
+# Coordinates, empty room, calibration
+
+.boxed-content[
+.pull-left.code-xs[
+.code-label[`sub-01_ses-meg_coordsystem.json` (excerpt)]
+```JSON
+{
+    "MEGCoordinateSystem": "ElektaNeuromag",
+    "MEGCoordinateUnits": "m",
+    "MEGCoordinateSystemDescription": "RAS orientation
+        and the origin between the ears",
+    "HeadCoilCoordinates": {
+        "NAS": [ ... ],
+        "LPA": [ ... ],
+        "RPA": [ ... ],
+        "coil1": [ ... ],
+        ...
+    },
+    ...
+    "AnatomicalLandmarkCoordinateSystem": "ElektaNeuromag",
+    "AnatomicalLandmarkCoordinateUnits": "m"
+}
+```
+]
+
+.pull-right[
+.tree[
+<div><i class="fa-solid fa-folder-open"></i> sub-emptyroom/</div>
+<div class="d1"><i class="fa-solid fa-folder-open"></i> ses-19110112/</div>
+<div class="d2"><i class="fa-solid fa-folder-open"></i> meg/</div>
+<div class="d3"><i class="fa-solid fa-table"></i> sub-emptyroom_ses-19110112_task-noise_channels.tsv</div>
+<div class="d3"><i class="fa-solid fa-wave-square"></i> <mark>sub-emptyroom_ses-19110112_task-noise_meg.fif</mark></div>
+<div class="d3"><i class="fa-solid fa-paperclip"></i> sub-emptyroom_ses-19110112_task-noise_meg.json</div>
+<div class="d1 gray-text"><i class="fa-solid fa-ellipsis"></i> six more sessions, one per recording date</div>
+]
+
+.meta-steps[
+* Pointed to by `AssociatedEmptyRoom` in each `_meg.json`
+* Session label: the recording date (`YYYYMMDD`)
+* Per subject, for MaxFilter/SSS:<br />`_acq-calibration_meg.dat`, `_acq-crosstalk_meg.fif`
+]
+]
+]
+
+???
+
+`_coordsystem.json` says in which coordinate system the head coils and anatomical landmarks
+(nasion, left and right pre-auricular points) are expressed: here the Elekta Neuromag head frame,
+in meters. This is what later allows co-registration of the MEG sensors with the T1w image from
+the MRI session.
+
+Empty-room recordings capture the noise of the room and the system without a participant.
+The spec recommends one pseudo-subject `sub-emptyroom`, with the date as session label,
+and `task-noise`. ds000117 has seven such sessions.
+Note: the current specification prefers BIDS URIs (`bids::sub-emptyroom/...`) for
+`AssociatedEmptyRoom`; plain relative paths, as in this dataset, are deprecated.
+
+Fine-calibration and cross-talk files come from the MEGIN/Elekta system and are needed by
+Maxwell filtering (SSS). BIDS gives them a fixed name so tools can find them.
+
+---
+
+# bids.neuroimaging.io/getting_started
+
+.boxed-content[
+<iframe src="https://bids.neuroimaging.io/getting_started/" width="100%" height="530px" style="border: 0; margin-top: 10px"></iframe>
+]
+
+???
+
+The getting-started guide is the best entry point for newcomers, and it links to the
+specification (bids-specification.readthedocs.io), which has a dedicated page for each modality.
+For today, the MEG and EEG pages are the ones to bookmark.
+
+---
+
+# BIDS Validator
+
+.boxed-content.code-s[
+The machine-readable structure makes validation possible, in the browser
+([bids-standard.github.io/bids-validator](https://bids-standard.github.io/bids-validator/)) or on the command line:
+
+```no-highlight
+$ git clone https://github.com/OpenNeuroDatasets/ds000117   # text files and symlinks only
+$ deno run -ERWN jsr:@bids/validator --ignoreNiftiHeaders ds000117/
+  [WARNING] SIDECAR_FIELD_OVERRIDE Sidecar files should not override values assigned at a higher level.
+  [WARNING] JSON_KEY_RECOMMENDED A JSON file is missing a key listed as recommended.
+  [WARNING] SIDECAR_KEY_RECOMMENDED A data file's JSON sidecar is missing a key listed as recommended.
+  [WARNING] TSV_ADDITIONAL_COLUMNS_UNDEFINED A TSV file has extra columns which are not defined in its associated JSON sidecar
+
+          Summary:                          Available Tasks:        Available Modalities:
+          1157 Files, 90.1 GB               facerecognition         MRI
+          17 - Subjects 9 - Sessions        noise                   MEG
+```
+.gray-text[(per-file details omitted) With `--ignoreWarnings` as well:]
+```no-highlight
+This dataset appears to be BIDS compatible.
+```
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> Schema-based validator (v3.0.2, BIDS 1.11.1): the rules are generated from the same schema that renders the specification
+]
+
+???
+
+Real output, obtained on 30.09.2026 on a plain `git clone` of the OpenNeuro repository of ds000117:
+the imaging data are git-annex symlinks, so the 90 GB are not downloaded. That is why
+`--ignoreNiftiHeaders` is needed here: without it, the validator reports that it cannot
+read the NIfTI headers.
+
+No errors, four kinds of warnings. The first one is the inheritance override from a few
+slides ago. The others are recommended keys that were not filled in, and TSV columns
+(`circle_duration`, `trigger` in the fMRI events) that are not described in a JSON sidecar.
+
+The legacy Node.js validator (1.x) is deprecated; the current one is written in TypeScript,
+runs with Deno, and is driven by the BIDS schema.
+
+---
+
+# Sharing through OpenNeuro
+
+.boxed-content[
+.center[[openneuro.org/datasets/ds000117/versions/2.0.0](https://openneuro.org/datasets/ds000117/versions/2.0.0)
+&middot; ![:doi](10.18112/openneuro.ds000117.v2.0.0)]
+
+<iframe src="https://openneuro.org/datasets/ds000117/versions/2.0.0" width="100%" height="490px" style="border: 0"></iframe>
+]
+
+???
+
+OpenNeuro validates every upload with the BIDS validator, gives each snapshot a DOI,
+and exposes the data through several channels: web download, the public S3 bucket,
+and one DataLad/git repository per dataset on GitHub (OpenNeuroDatasets).
+Version 2.0.0 of ds000117 is the current snapshot (September 2026).
+
+---
+layout: true
+template: newsection
+name: apps
+
+# BIDS Apps
+
+---
+
+A common specification of neuroimaging datasets affords queries for and
+adaptation to the available data.
+--
+.boxed-content[
+Queryable (meta)data allows a very simple protocol for a
+[BIDS App](https://bids-apps.neuroimaging.io/apps/):
+
+```Bash
+app /bids_dir /output_dir participant [OPTIONS]
+```
+
+.footnote[
+\* `participant` is an analysis level. Apps may also operate
+at the `run`, `session` or `group` levels.
+&middot; Gorgolewski et al. (2017), ![:doi](10.1371/journal.pcbi.1005209)
+]]
+
+--
+
+.boxed-content[
+### Examples on ds000117
+
+**MRIQC**
+
+```Bash
+mriqc ds000117/ derivatives/mriqc/ participant --participant-label 01
+mriqc ds000117/ derivatives/mriqc/ group
+```
+]
+--
+
+.boxed-content[
+**fMRIPrep**
+
+```Bash
+fmriprep ds000117/ derivatives/fmriprep/ participant --participant-label 01
+```
+]
+
+???
+
+The contract: input dataset, output folder, analysis level. Everything else (which subjects,
+which modality, which session) is resolved by querying the BIDS structure.
+
+MRIQC and fMRIPrep only see the MRI session of ds000117 and ignore the MEG data.
+fMRIPrep will additionally need a FreeSurfer license file (`--fs-license-file`).
+
+Both are distributed as containers: that is the topic of the next session on containers.
+
+---
+layout: true
+template: newsection
+
+---
+
+# M/EEG: MNE-BIDS-Pipeline
+
+.boxed-content[
+.pull-left.code-s[
+A BIDS App configured with a Python file instead of positional arguments
+(this one adapted from the pipeline's own ds000117 test configuration):
+
+```Python
+# config.py
+bids_root = "~/mne_data/ds000117"
+
+task = "facerecognition"
+sessions = ["meg"]
+subjects = ["01"]
+runs = ["01", "02"]
+ch_types = ["meg"]
+
+use_maxwell_filter = True
+process_empty_room = True
+```
+]
+
+.pull-right.code-xs[
+Create a template, edit, run:
+
+```Bash
+pip install mne-bids-pipeline
+mne_bids_pipeline --create-config=config.py
+mne_bids_pipeline --config=config.py
+mne_bids_pipeline --config=config.py --steps=preprocessing
+```
+
+.meta-steps[
+* Finds the empty-room recording through `AssociatedEmptyRoom`
+* Leave `mf_cal_fname` and `mf_ctc_fname` unset: the calibration and cross-talk files are found at their BIDS location
+* Results under `derivatives/mne-bids-pipeline/` by default, with HTML reports
+]
+]
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> [mne.tools/mne-bids-pipeline](https://mne.tools/mne-bids-pipeline/stable/): the same BIDS conventions, driving a full M/EEG processing chain
+]
+
+???
+
+MNE-BIDS-Pipeline does not follow the positional `bids_dir output_dir level` contract;
+everything goes in a configuration file. The keys shown are from the test configuration
+the developers use on ds000117 itself (trimmed).
+
+The point for today: because ds000117 stores the empty-room recordings, the fine-calibration and
+the cross-talk files where BIDS says they should be, the pipeline needs no paths to them.
+The configuration only lists what cannot be inferred (which task, which subjects, which channels).
+
+---
+
+.pull-left[
+### Many application types are possible
+]
+.pull-right.apps-shot[
+[![:img BIDS App list, 75%](images/bids-apps.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+---
+count: false
+
+.pull-left[
+### Many application types are possible
+
+* Quality control
+
+]
+.pull-right.apps-shot[
+[![:img BIDS QC Apps, 75%](images/bids-apps-qc.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+---
+count: false
+
+.pull-left[
+### Many application types are possible
+
+* Quality control
+
+* Anatomical pipelines
+
+]
+.pull-right.apps-shot[
+[![:img BIDS Anatomical Apps, 75%](images/bids-apps-anatomical.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+---
+count: false
+
+.pull-left[
+### Many application types are possible
+
+* Quality control
+
+* Anatomical pipelines
+
+* Functional pipelines
+
+]
+.pull-right.apps-shot[
+[![:img BIDS Functional Apps, 75%](images/bids-apps-functional.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+---
+count: false
+
+.pull-left[
+### Many application types are possible
+
+* Quality control
+
+* Anatomical pipelines
+
+* Functional pipelines
+
+* Diffusion pipelines
+
+]
+.pull-right.apps-shot[
+[![:img BIDS Diffusion Apps, 75%](images/bids-apps-diffusion.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+---
+count: false
+
+.pull-left[
+### Many application types are possible
+
+* Quality control
+
+* Anatomical pipelines
+
+* Functional pipelines
+
+* Diffusion pipelines
+
+### Lowered friction encourages adoption
+
+* Researchers gain easy access to tools by formatting data
+  in BIDS
+
+* Accepting BIDS datasets makes your tools easy to try
+
+]
+.pull-right.apps-shot[
+[![:img BIDS App list, 75%](images/bids-apps.png)](https://bids-apps.neuroimaging.io/apps/)
+]
+
+???
+
+The BIDS Apps registry lists quality control, anatomical, functional and diffusion pipelines,
+among others. For M/EEG, MNE-BIDS-Pipeline plays the same role.
+
+---
+
+# BIDS Derivatives
+
+.boxed-content[
+BIDS Derivatives generally mirror the raw dataset. For instance, fMRIPrep on the MRI session:
+
+.tree.lg[
+<div><i class="fa-solid fa-folder-open"></i> derivatives/fmriprep/</div>
+<div class="d1"><i class="fa-solid fa-paperclip"></i> dataset_description.json</div>
+<div class="d1"><i class="fa-solid fa-folder-open"></i> sub-01/</div>
+<div class="d2"><i class="fa-solid fa-folder-open"></i> ses-mri/</div>
+<div class="d3"><i class="fa-solid fa-folder-open"></i> func/</div>
+<div class="d4"><i class="fa-solid fa-table"></i> sub-01_ses-mri_task-facerecognition_run-01_<mark>desc-confounds</mark>_<mark>timeseries</mark>.tsv</div>
+<div class="d4"><i class="fa-solid fa-brain"></i> sub-01_ses-mri_task-facerecognition_run-01_<mark>space-MNI152NLin2009cAsym</mark>_<mark>desc-brain</mark>_<mark>mask</mark>.nii.gz</div>
+<div class="d4"><i class="fa-solid fa-brain"></i> sub-01_ses-mri_task-facerecognition_run-01_<mark>space-MNI152NLin2009cAsym</mark>_<mark>desc-preproc</mark>_bold.nii.gz</div>
+<div class="d4 gray-text"><i class="fa-solid fa-ellipsis"></i></div>
+<div class="d1 gray-text"><i class="fa-solid fa-folder"></i> sub-02/ ... sub-16/</div>
+]
+
+.no-bullet[
+* <i class="fa-solid fa-circle-right"></i> New entities (`space-`, `desc-`) and suffixes (`timeseries`, `mask`) describe what was done
+* <i class="fa-solid fa-circle-right"></i> `dataset_description.json` declares `"DatasetType": "derivative"` and `GeneratedBy` (which tool, which version)
+* <i class="fa-solid fa-circle-right"></i> A derivative dataset is itself valid input for the next BIDS App
+]
+]
+
+???
+
+Derivatives keep the same subject/session/datatype structure as the raw data, and add entities.
+Because they are BIDS too, one app's outputs can feed the next one (e.g., fMRIPrep then XCP-D),
+and query tools such as PyBIDS can index them.
+
+---
+
+# PyBIDS: querying ds000117
+
+.boxed-content.code-m[
+[PyBIDS](https://github.com/bids-standard/pybids) (`pip install pybids`) indexes names and sidecars, no data needed:
+
+```Python
+>>> from bids import BIDSLayout
+>>> layout = BIDSLayout("ds000117")
+>>> layout
+BIDS Layout: .../ds000117 | Subjects: 17 | Sessions: 39 | Runs: 144
+>>> layout.get_tasks()
+['facerecognition', 'noise']
+>>> fifs = layout.get(subject="01", task="facerecognition", suffix="meg",
+...                   extension=".fif", return_type="filename")
+>>> len(fifs)
+6
+>>> md = layout.get_metadata(fifs[0])
+>>> md["RecordingDuration"], md["AssociatedEmptyRoom"]
+(490.9990909090909, 'sub-emptyroom/ses-19110112/meg/sub-emptyroom_ses-19110112_task-noise_meg.fif')
+>>> md["TaskDescription"][:52]  # inherited from task-facerecognition_meg.json
+'Subjects viewed stimuli on a screen during six, 7.5 '
+```
+]
+
+???
+
+Real session (PyBIDS on the same shallow git clone, content not downloaded).
+`get_metadata` resolves the inheritance principle for you: `RecordingDuration` comes from the
+run-level sidecar, `TaskDescription` from the root.
+"Sessions: 39" counts subject/session pairs: 16 subjects with two sessions, plus seven
+empty-room dates.
+
+---
+
+# MNE-BIDS: reading M/EEG
+
+.boxed-content.code-m[
+[MNE-BIDS](https://mne.tools/mne-bids/) (`pip install mne-bids`) builds paths from entities and reads the sidecars along with the data:
+
+```Python
+>>> from mne_bids import BIDSPath, read_raw_bids
+>>> bids_path = BIDSPath(root="ds000117", subject="01", session="meg",
+...                      task="facerecognition", run="01", datatype="meg")
+>>> bids_path.fpath
+PosixPath('ds000117/sub-01/ses-meg/meg/sub-01_ses-meg_task-facerecognition_run-01_meg.fif')
+>>> bids_path.meg_calibration_fpath
+PosixPath('ds000117/sub-01/ses-meg/meg/sub-01_ses-meg_acq-calibration_meg.dat')
+>>> raw = read_raw_bids(bids_path)     # needs the .fif content (about 860 MB)
+>>> empty_room = bids_path.find_empty_room()
+```
+]
+
+.admonition[
+<i class="fa-solid fa-circle-right"></i> `read_raw_bids` applies `_channels.tsv` (types, bad channels) and `_events.tsv` (annotations) to the MNE `Raw` object
+]
+
+???
+
+The first two outputs are real (mne-bids 0.20 on the same clone). The last two lines need the
+recordings themselves: fetch them first with `datalad get` (see the appendix slide).
+
+`find_empty_room` follows `AssociatedEmptyRoom` when present, or picks the closest
+`sub-emptyroom` session by date otherwise.
+
+---
+
+# Converting to BIDS
+
+.cards.cols-2[
+.card[
+.section-icon.corner[<i class="fa-solid fa-magnet"></i>]
+
+.kicker[MRI: DICOM to NIfTI + JSON]
+
+### dcm2niix, HeuDiConv, BIDScoin
+* [dcm2niix](https://github.com/rordenlab/dcm2niix) writes the NIfTI and its BIDS sidecar
+* [HeuDiConv](https://heudiconv.readthedocs.io/) and [BIDScoin](https://bidscoin.readthedocs.io/) map series to BIDS names in bulk
+* ds000117's `_bold.json` records it: `"ConversionSoftware": "dcm2niix"`, `"HeudiconvVersion": "1.3.3"`
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-wave-square"></i>]
+
+.kicker[M/EEG: native files stay native]
+
+### MNE-BIDS
+
+.code-s[
+```Python
+raw = mne.io.read_raw_fif("run01_raw.fif")
+bids_path = BIDSPath(subject="01", session="meg",
+                     task="facerecognition",
+                     run="01", root="bids/")
+write_raw_bids(raw, bids_path)
+write_meg_calibration("sss_cal.dat", bids_path)
+write_meg_crosstalk("ct_sparse.fif", bids_path)
+```
+]
+]
+]
+
+.admonition[
+<i class="fa-solid fa-person-chalkboard"></i> Next, at **11:30**: **BIDSManager hands-on**, with **Moustafa Almanla**
+]
+
+???
+
+MRI conversion always starts from DICOM. dcm2niix does the heavy lifting; HeuDiConv and BIDScoin
+decide which series becomes which BIDS file. ds000117's current MRI sidecars were produced
+with HeuDiConv and dcm2niix, and say so.
+
+For M/EEG there is nothing to convert in the data format: MNE-BIDS reads the native recording,
+writes it with the right name, and generates `_meg.json`, `_channels.tsv`, `_events.tsv` and
+`_coordsystem.json` from what MNE knows about the recording. The file names in the example
+are placeholders for your own files.
+
+Hand over to the next session.
+
+---
+
+# Appendix: explore ds000117 on your own
+
+.boxed-content.code-s[
+On [play-europe.neurodesk.org](https://play-europe.neurodesk.org), open a terminal:
+
+```Bash
+datalad install https://github.com/OpenNeuroDatasets/ds000117.git
+cd ds000117
+tree -L 3 sub-01                         # the layout, no data downloaded yet
+less task-facerecognition_meg.json       # a root-level sidecar (q to quit)
+less sub-01/ses-meg/meg/sub-01_ses-meg_task-facerecognition_run-01_meg.json
+datalad get sub-emptyroom/ses-19110112/meg/sub-emptyroom_ses-19110112_task-noise_meg.fif  # 78 MB
+
+# No DataLad? JSON and TSV files only, from OpenNeuro's public S3 bucket:
+aws s3 sync --no-sign-request s3://openneuro.org/ds000117 ds000117 \
+    --exclude "*" --include "*.json" --include "*.tsv"
+
+# Query it with PyBIDS:
+python -c "from bids import BIDSLayout; print(BIDSLayout('ds000117').get_tasks())"
+```
+]
+
+.admonition[
+<i class="fa-solid fa-circle-info"></i> The Neurodesktop Dockerfile installs DataLad, git-annex, `tree` and `less`: check with `which datalad`. If missing, `pip install --user pybids awscli`
+]
+
+???
+
+For after the school. The DataLad route gets the full tree in seconds (text files and
+symlinks), then only the files you ask for. The empty-room recording is a good first
+download: small, and readable with MNE.
+
+The S3 route needs the AWS command line client; `--no-sign-request` means no account is needed.
+
+I checked that the Neurodesktop image's Dockerfile installs DataLad, git-annex, tree and less;
+I have not checked PyBIDS or the AWS CLI on Play Europe, hence the `pip install` fallback.
+
+---
+class: vcenter
+
+# Thank you
+
+.cta[
+All materials: **www.indos-costaction.eu/wg3-ts2026-esteban**, CC BY 4.0.
+]
+
+.cost-ack[
+<img src="../assets/cost-logo-darkgrey.png" alt="COST" /> <img src="../assets/eu-funded-pos.png" alt="Funded by the European Union" /> This publication is based upon work from COST Action CA24161 (INDoS), supported by COST (European Cooperation in Science and Technology).
+]
+
+</textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script src="../remark/core/engine.js"></script>
+    <script src="../remark/ext/svg-preload.js"></script>
+    <script src="../remark/ext/stepwise-svg.js"></script>
+    <script src="../remark/ext/svg-theme.js"></script>
+    <script src="../remark/ext/nav-controls.js"></script>
+    <script src="../remark/ext/asciicasts.js"></script>
+  </body>
+</html>
