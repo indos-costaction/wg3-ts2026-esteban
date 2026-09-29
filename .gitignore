@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+
+# The real roster of in-person trainees, and the deck symlink to it. Never in
+# git: the repository is public and roulette.js fetches this file at run time.
+# The committed roster.yml is a synthetic placeholder and is what the
+# published site serves.
+roster.local.yml

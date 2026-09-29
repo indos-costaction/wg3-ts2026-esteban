@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome | INDoS WG3 Training School 2026</title>
+    <meta charset="utf-8">
+    <meta name="grammarly" content="false">
+    <meta name="google" content="notranslate">
+    <link rel="icon" type="image/png" href="../assets/indos-brain.png" />
+    <link rel="stylesheet" type="text/css" href="../remark/vendor/asciinema-player/asciinema-player.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/core/base.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/themes/indos.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/ext/nav-controls.css" />
+    <link rel="stylesheet" type="text/css" href="../remark/ext/roulette.css" />
+  </head>
+  <body>
+<style>
+/* The URL resolves against remark/core/base.css, where var(--logo-url) is
+   used, not against this page: hence two levels up. */
+:root { --logo-url: url("../../assets/indos-logo-left.png"); }
+</style>
+<script src="../remark/vendor/asciinema-player/asciinema-player.min.js"></script>
+<script src="https://kit.fontawesome.com/015d4b01de.js" crossorigin="anonymous"></script>
+
+<textarea id="source">
+name: title
+layout: true
+class: cover, indos-cover, no-logo
+
+---
+count: false
+
+.cover-band[
+<img class="lockup" src="../assets/indos-logo-left-white.png" alt="INDoS" />
+
+.eyebrow[WG3 Training School &middot; Madrid 2026]
+
+# Welcome
+
+### INDoS WG3 Training School on preprocessing pipelines
+
+.who[Oscar Esteban &lt;oscar.esteban@hevs.ch&gt;<br />HES-SO Valais-Wallis &middot; 30.09.2026]
+
+<div class="mosaic"></div>
+]
+
+.cover-side[
+<a href="https://www.indos-costaction.eu/wg3-ts2026-esteban/day1-01-welcome/">
+  <object type="image/svg+xml" data="images/qr-talk-url.svg"></object>
+  <br />
+  www.indos-costaction.eu/wg3-ts2026-esteban/day1-01-welcome/
+</a>
+]
+
+.cover-logos[
+<img src="../assets/cost-logo-darkgrey.png" alt="COST" /> <img src="../assets/eu-funded-pos.png" alt="Funded by the European Union" />
+]
+
+???
+
+
+Welcome everyone, in the room and online, to the first Training School of INDoS Working Group 3.
+
+We are hosted by CSIC here at Espacio Converge, Campus Serrano. The slides for this morning are online: scan the QR code, they are all under the same address.
+
+---
+name: newsection
+layout: true
+
+.perma-sidebar[
+<p class="rotate">
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0; height: 20px; padding-top: 6px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  <span style="padding-left: 10px; font-weight: 600;">INDoS WG3 Training School &middot; Welcome (30.09.2026)</span>
+</p>
+]
+
+---
+
+# This morning .gray-text[Wednesday 30 September]
+
+.boxed-content.program-table[
+| Time | Content |
+|:--:|:--|
+| 09:00 | .tag.plenary[Plenary] Welcome |
+| 09:20 | .tag.plenary[Plenary] INDoS and Working Group 3 |
+| 09:35 | .tag.plenary[Plenary] Introductions: 45 seconds each |
+| 10:00 | .tag.theory[Theory] Standardized preprocessing: why pipelines, why automation |
+| 10:45 | .tag.theory[Theory] BIDS across modalities |
+| 11:15 | .gray-text[Coffee] |
+| 11:30 | .tag.practice[Practice] BIDSManager hands-on, with Moustafa Almanla |
+| 12:00 | .tag.theory[Theory] Containers |
+| 12:30 | .tag.practice[Practice] Environment bring-up |
+| 13:00 | .gray-text[Lunch] |
+]
+
+???
+
+Block 1: standards, data, environments.
+
+The afternoon (Block 2, with Mélanie Garcia) continues with Neurodesk (Steffen Bollmann, remotely from Toronto), how to read and review a neuroimaging paper, and the Journal Club.
+
+Note the change at 11:30: the hands-on is BIDSManager, with Moustafa Almanla.
+
+---
+
+# Three days, six blocks
+
+.boxed-content[
+<iframe src="https://www.indos-costaction.eu/training#programme-at-a-glance" style="width: 100%; height: 500px; border: 1px solid #e4e8ee; border-radius: 8px;"></iframe>
+
+.small.center[The full programme: [www.indos-costaction.eu/training](https://www.indos-costaction.eu/training)]
+]
+
+???
+
+Walk through the programme at a glance:
+
+- Wednesday: standards, data and environments (morning); environments, provenance and how to read a paper, with the Journal Club (afternoon).
+- Thursday: PET, EEG/MEG and structural MRI (morning); diffusion MRI (afternoon).
+- Friday: functional MRI, did it work? (morning); personal projects and closing (afternoon).
+
+Friday afternoon is for your own projects: bring your own data (BYOD).
+
+---
+class: vcenter
+
+# Guest Wi-Fi
+
+.boxed-content[
+.pull-left.center[
+<object type="image/svg+xml" data="images/qr-wifi.svg" style="width: 62%"></object>
+
+.gray-text[Scan to join]
+]
+
+.pull-right.large[
+<br />
+
+.eyebrow[Network]
+
+.larger[**eventos-csic**]
+
+<br />
+
+.eyebrow[Password]
+
+.larger[`2Jqv590CGfwp`]
+]
+]
+
+???
+
+eduroam also works on the campus for those who have it set up.
+
+---
+class: vcenter
+
+# INDoS at a glance
+
+.cards.brand.cols-3[
+.card[
+.kicker[COST Action CA24161]
+
+### Improving Neuroimaging Data for Sharing
+
+Make neuroimaging data truly FAIR (Findable, Accessible, Interoperable, Reusable) by developing shared standards, tools, and ethical guidelines for data sharing.
+
+.foot[30 September 2025 to 29 September 2029]
+]
+.card[
+.kicker[Network]
+
+.metric[243]
+
+.center[members from **38 countries**]
+
+.foot[Listed on the Action's website, September 2026]
+]
+.card[
+.kicker[Leadership]
+
+### Chair
+
+Jochem Rieger .gray-text[(University of Oldenburg)]
+
+### Vice-Chair
+
+Guiomar Niso .gray-text[(CSIC, our host)]
+
+.foot[www.indos-costaction.eu]
+]
+]
+
+???
+
+COST Actions are networks funded by COST (European Cooperation in Science and Technology): they fund meetings, training schools, short-term scientific missions and dissemination, not research itself.
+
+INDoS runs four years, from September 2025 to September 2029.
+
+---
+class: vcenter
+
+# Four challenges
+
+.boxed-content[
+.large[Researchers who share, or use shared, neuroimaging data face four interrelated challenges:]
+]
+
+.cards.brand.cols-4[
+.card[
+.section-icon.corner[<i class="fa-solid fa-check-double"></i>]
+
+.kicker[WG1]
+
+### Data quality
+
+No standard for assessing data quality.
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-tags"></i>]
+
+.kicker[WG2]
+
+### Metadata
+
+Metadata are missing.
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-gears"></i>]
+
+.kicker[WG3]
+
+### Preprocessing
+
+No standard preprocessing pipelines.
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-scale-balanced"></i>]
+
+.kicker[WG4]
+
+### Ethics and law
+
+Unclear ethics and legal regulations of data sharing.
+]
+]
+
+???
+
+This is the Action's challenge, as written in its Memorandum of Understanding: "lacking standardization of data quality assessment and preprocessing pipelines, missing metadata, and unclear data sharing ethics and legal regulations."
+
+Each challenge has a working group. WG5 takes care of dissemination and communication across all of them.
+
+---
+class: vcenter
+
+# Five working groups
+
+.cards.brand.cols-5.tight.compact[
+.card[
+.kicker[WG1]
+
+### Quality Assessment and Quality Control
+
+Recommendations, standard measures and reporting guidelines for QA/QC across MEG, EEG, MRI and fNIRS.
+
+.foot[Lead: Robert Oostenveld]
+]
+.card[
+.kicker[WG2]
+
+### Metadata
+
+Standardized metadata: extend BIDS, describe experiments, integrate metadata in tools, train people to use it.
+
+.foot[Lead: Lyuba Zehl]
+]
+.card.accent[
+.kicker[WG3]
+
+### Automated Preprocessing Pipelines
+
+Guidelines and tools for reproducible, documented, well-justified preprocessing. MEG and EEG first.
+
+.foot[Lead: Oscar Esteban, co-lead: Guiomar Niso]
+]
+.card[
+.kicker[WG4]
+
+### Ethics, Practices, and Regulations
+
+Tools and practices that lift the legal uncertainty around sharing human neuroimaging data.
+
+.foot[Lead: Camille Maumet]
+]
+.card[
+.kicker[WG5]
+
+### Dissemination and Communication
+
+Coordinates the Action's dissemination and communication activities.
+
+.foot[Lead: Mathew Abrams]
+]
+]
+
+???
+
+The aims are paraphrased from the Memorandum of Understanding.
+
+Co-leads: WG1 Michal Mikl and Karel Lopez Vilaret; WG2 Karel Lopez Vilaret, Anđela Šoškić, Başak Esin Köktürk Güzel and Mateusz Pawlik; WG4 Jochem Rieger; WG5 Esin Ozturk-Isik.
+
+Anyone can join a working group: ask us how.
+
+---
+
+# Working groups organize in task forces
+
+.cards.brand.cols-3[
+.card[
+.kicker[WG1 &middot; QA/QC]
+
+- Existing practices in neuroimaging
+- Practices in other domains
+- EEG quality assessment
+- MEG quality assessment
+- MRI quality assessment
+]
+.card[
+.kicker[WG2 &middot; Metadata]
+
+- BIDS outreach and augmentation
+- Guidelines on how to best use BIDS
+- Tool alignment
+- Demonstrator datasets
+- Training materials
+]
+.card[
+.kicker[WG4 &middot; Ethics and regulations]
+
+- Anonymity and reidentification
+- Ethics, open science and data sharing
+- Clinical and non-clinical aspects
+- Legal aspects
+]
+]
+
+.boxed-content[
+.gray-text[Task forces are where the work happens: small teams, one concrete objective, open to any member.]
+]
+
+???
+
+WG5 works across the Action and has no task forces of its own.
+
+The WG2 tool-alignment task force focuses on tools that create or work with BIDS-compliant datasets, which is very close to what we do this morning.
+
+---
+
+# WG3: Automated Preprocessing Pipelines
+
+.boxed-content[
+.cta[
+**Aim**: guidelines and tools for reproducible, well-documented, and well-justified preprocessing of neuroimaging data. The initial focus is on **MEG and EEG**, drawing on the more developed standardization of MRI preprocessing.
+]
+]
+
+.cards.steps.tight[
+.card[
+.enum[T1]
+
+**Inventory** of modality-specific preprocessing best practices, tools and pipelines (MRI, MEG, EEG, fNIRS).
+]
+.card[
+.enum[T2]
+
+**Networking** towards standards for rational preprocessing steps, with MEG/EEG in focus, reaching out to fMRIPrep and NiPreps.
+]
+.card[
+.enum[T3]
+
+**Documentation standards** for preprocessing and provenance tracking (with COBIDAS, NIDM, BIDS-Prov).
+]
+.card[
+.enum[T4]
+
+**Pipeline integration** opportunities (FieldTrip, MNE, NiPreps, fMRIPrep).
+]
+.card[
+.enum[T5]
+
+**Training material** for rational preprocessing. .gray-text[You are here.]
+]
+]
+
+???
+
+These are the five tasks written into the Memorandum of Understanding.
+
+---
+class: vcenter
+
+# WG3 task forces and deliverables
+
+.cards.brand.cols-3[
+.card[
+.section-icon.corner[<i class="fa-solid fa-list-check"></i>]
+
+.kicker[TF1]
+
+### Inventory of tools and workflows
+
+A taxonomy and survey of preprocessing tools and workflows across modalities.
+
+.foot[Lead: Friedrich Carrle &middot; D3.1: an up-to-date inventory, published on the Action's website]
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-book-open"></i>]
+
+.kicker[TF2]
+
+### Literature review
+
+A pre-registered systematic review of preprocessing practices and how they are reported.
+
+.foot[D3.2: open publications on rational preprocessing and provenance tracking]
+]
+.card[
+.section-icon.corner[<i class="fa-solid fa-chalkboard-user"></i>]
+
+.kicker[TF3]
+
+### Training materials
+
+Preprocessing training resources for the community, **including this school**.
+
+.foot[Lead: Başak Esin Köktürk Güzel &middot; D3.3: training material, published on the Action's website]
+]
+]
+
+.boxed-content[
+.center.gray-text[Transversal to the three task forces: the **Federated Journal Club**.]
+]
+
+???
+
+The deliverables D3.1 to D3.3 are those of the Memorandum of Understanding.
+
+Everything you produce here (slides, notebooks, your own project on Friday) feeds D3.3.
+
+---
+
+# The Federated Journal Club
+
+.left-column2[
+.cards.cols-1.tight[
+.card[
+.metric[239]
+
+.center[papers in the pool]
+]
+.card[
+.metric[10]
+
+.center[nine modalities + cross-modality methods]
+]
+]
+]
+
+.right-column2[
+Participants collaboratively **read and critically annotate** the neuroimaging preprocessing literature.
+
+- **Open to everyone**: no INDoS membership required.
+- Especially welcomes **trainees and early-career researchers**.
+- Anatomical MRI, EEG, CT, PET, MEG, fNIRS, fMRI, diffusion MRI, SPECT, and cross-modality methods.
+- The annotations become an **open meta-review** publication, with participating reviewers credited as **co-authors**.
+
+.center[
+<a href="https://www.indos-costaction.eu/journal-club/">
+<object type="image/svg+xml" data="images/qr-journal-club.svg" style="width: 22%"></object>
+<br />
+www.indos-costaction.eu/journal-club
+</a>
+]
+]
+
+???
+
+The pool counts come from the Journal Club's live status on 30 September 2026.
+
+The Journal Club is transversal to WG3's task forces: it feeds the literature review (TF2) and trains reviewers (TF3).
+
+---
+
+# How the Journal Club works
+
+.cards.steps[
+.card[
+.enum[1]
+
+**Claim** up to 3 papers at a time. Each claim runs for 12 days, with one 7-day extension.
+]
+.card[
+.enum[2]
+
+**Annotate** the PDF inline: what you did not understand, what has been contested or superseded, what matters for INDoS (data sharing, standardization, reproducibility).
+]
+.card[
+.enum[3]
+
+**Sign it off** from your GitHub account. **No AI** may be used to read, summarize, or annotate.
+]
+.card[
+.enum[4]
+
+**Graded** on a 5-axis rubric, with critical appraisal weighing most. A paper is done at 3 reviews.
+]
+]
+
+.boxed-content[
+.cta[
+**This afternoon**: 15:00 How to read and review a neuroimaging paper, with Mélanie Garcia &middot; 16:00-17:45 Journal Club, in practice.
+]
+]
+
+???
+
+Rules as enforced by the tracking system (RULES.md in the journal-club repository): at most 3 active claims per person, a paper closes to new claims once 5 people hold it, done at 3 completed reviews, quality floor of 2.0 out of 5.
+
+The five axes: engagement and coverage, comprehension, critical appraisal, action relevance, originality (non-AI).
+
+---
+class: roulette
+time: 45
+include_org: true
+
+# Introductions
+
+.boxed-content[
+.pull-left.large[
+**45 seconds** each:
+
+.no-bullet[
+* <i class="fa-solid fa-id-badge"></i> Your **name**
+* <i class="fa-solid fa-building-columns"></i> Your **affiliation** and country
+* <i class="fa-solid fa-stairs"></i> Your **career stage**
+* <i class="fa-solid fa-brain"></i> Your **areas of interest**
+* <i class="fa-solid fa-bullseye"></i> Your **motivation** to be here, and what you **expect** from the school
+]
+]
+
+.pull-right[
+<br />
+<br />
+
+.cta[
+<i class="fa-solid fa-video"></i> **Joining online?** Introduce yourself in the chat with the same five points while the room goes around.
+]
+]
+]
+
+???
+
+Space starts or pauses the roulette, S skips a name, K ends it. The time per person can be changed in the controls bar.
+
+In-person introductions only: 28 people at 45 seconds is about 21 minutes of a 25-minute slot.
+
+The names come from roster.local.yml, which is not in the repository: serve the deck locally for the real list.
+
+---
+class: vcenter
+
+# Up next
+
+.boxed-content[
+.cta[
+**10:00 Standardized preprocessing**: why pipelines, why automation, the pipeline end to end with fMRIPrep as the reference model.
+]
+]
+
+.boxed-content.center[
+All materials of this morning: **[www.indos-costaction.eu/wg3-ts2026-esteban](https://www.indos-costaction.eu/wg3-ts2026-esteban/)**, CC BY 4.0.
+]
+
+.cost-ack[
+<img src="../assets/cost-logo-darkgrey.png" alt="COST" /> <img src="../assets/eu-funded-pos.png" alt="Funded by the European Union" /> This publication is based upon work from COST Action CA24161 (INDoS), supported by COST (European Cooperation in Science and Technology).
+]
+
+</textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script src="../remark/core/engine.js"></script>
+    <script src="../remark/ext/svg-preload.js"></script>
+    <script src="../remark/ext/stepwise-svg.js"></script>
+    <script src="../remark/ext/svg-theme.js"></script>
+    <script src="../remark/ext/nav-controls.js"></script>
+    <script src="../remark/ext/roulette.js"></script>
+    <script>Roulette.init(slideshow);</script>
+  </body>
+</html>

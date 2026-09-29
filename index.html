@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Block 1 slides | INDoS WG3 Training School 2026</title>
+  <link rel="icon" type="image/png" href="assets/indos-brain.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Urbanist:wght@400;600&display=swap">
+  <style>
+    :root {
+      --orange: #F9B34B; --turquoise: #60BFAF; --lavender: #BE5EAC;
+      --purple: #5D288F; --navy: #122B62; --line: #e4e8ee;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Urbanist", system-ui, sans-serif; color: #222; background: #fff; }
+    header { background: var(--navy); color: #fff; padding: 40px 16px 48px; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+    header img { width: 220px; max-width: 60%; display: block; margin-bottom: 28px; }
+    .eyebrow { font-family: Montserrat, sans-serif; color: var(--orange); text-transform: uppercase;
+               letter-spacing: .14em; font-weight: 700; font-size: .8rem; }
+    h1 { font-family: Montserrat, sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); margin: .3em 0 .2em; }
+    header p { margin: .3em 0; color: rgba(255,255,255,.85); }
+    .mosaic { width: 59px; height: 11px; margin-top: 22px; background: linear-gradient(90deg,
+      var(--turquoise) 0 11px, transparent 11px 16px, var(--orange) 16px 27px, transparent 27px 32px,
+      var(--lavender) 32px 43px, transparent 43px 48px, var(--purple) 48px 59px); }
+    main { padding: 32px 0 16px; }
+    .deck { display: flex; gap: 18px; align-items: baseline; padding: 16px 18px; margin-bottom: 14px;
+            border: 1px solid var(--line); border-left: 4px solid var(--purple); border-radius: 0 10px 10px 0;
+            text-decoration: none; color: inherit; transition: background .15s; }
+    .deck:nth-of-type(4n+1) { border-left-color: var(--turquoise); }
+    .deck:nth-of-type(4n+2) { border-left-color: var(--orange); }
+    .deck:nth-of-type(4n+3) { border-left-color: var(--lavender); }
+    .deck:hover { background: #f7f3fc; }
+    .time { font-family: Montserrat, sans-serif; font-weight: 600; color: var(--purple);
+            font-variant-numeric: tabular-nums; min-width: 3.2em; }
+    .deck strong { font-family: Montserrat, sans-serif; color: var(--navy); display: block; font-size: 1.1rem; }
+    .deck span.sub { color: #555; }
+    .note { color: #666; font-size: .95rem; }
+    footer { border-top: 1px solid var(--line); margin-top: 24px; padding: 20px 0 32px; font-size: .85rem; color: #555; }
+    footer .logos { display: flex; gap: 20px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    footer .logos img { height: 40px; }
+    a { color: var(--purple); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <img src="assets/indos-logo-left-white.png" alt="INDoS: Improving Neuroimaging Data for Sharing">
+      <div class="eyebrow">WG3 Training School &middot; Madrid 2026</div>
+      <h1>Block 1: standards, data, environments</h1>
+      <p>Wednesday 30 September 2026, 09:00-13:00 &middot; Oscar Esteban, HES-SO Valais-Wallis</p>
+      <div class="mosaic"></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <a class="deck" href="day1-01-welcome/">
+      <span class="time">09:00</span>
+      <span><strong>Welcome</strong><span class="sub">The school, INDoS and Working Group 3, introductions</span></span>
+    </a>
+    <a class="deck" href="day1-02-preprocessing/">
+      <span class="time">10:00</span>
+      <span><strong>Standardized preprocessing</strong><span class="sub">Why pipelines, why automation: fMRIPrep as a reference model</span></span>
+    </a>
+    <a class="deck" href="day1-03-bids/">
+      <span class="time">10:45</span>
+      <span><strong>BIDS across modalities</strong><span class="sub">Structure, validation, the EEG/MEG extensions, BIDS Apps</span></span>
+    </a>
+    <a class="deck" href="day1-04-containers/">
+      <span class="time">12:00</span>
+      <span><strong>Containers</strong><span class="sub">Portable, versioned computing environments</span></span>
+    </a>
+    <p class="note">Full programme: <a href="https://www.indos-costaction.eu/training">www.indos-costaction.eu/training</a>.
+      Sources: <a href="https://github.com/indos-costaction/wg3-ts2026-esteban">github.com/indos-costaction/wg3-ts2026-esteban</a>.</p>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="logos">
+        <img src="assets/cost-logo-darkgrey.png" alt="COST">
+        <img src="assets/eu-funded-pos.png" alt="Funded by the European Union">
+      </div>
+      This publication is based upon work from COST Action CA24161 (INDoS), supported by COST (European Cooperation in Science and Technology).
+      Slides licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+    </div>
+  </footer>
+</body>
+</html>

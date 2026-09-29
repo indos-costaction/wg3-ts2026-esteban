@@ -1,0 +1,14 @@
+# roster.yml - synthetic placeholder, committed and published with the decks.
+# Do not put real names here: this repository is public and the published site
+# serves this file. Real names go in roster.local.yml (git-ignored), which
+# roulette.js prefers when the decks are served locally.
+organizers:
+  - Trainer One
+  - Trainer Two
+attendees:
+  - Trainee One
+  - Trainee Two
+  - Trainee Three
+  - Trainee Four
+  - Trainee Five
+  - Trainee Six
