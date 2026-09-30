@@ -938,7 +938,7 @@ Validation is not a one-off: every release is tested through continuous integrat
 # Tracking fMRIPrep's adoption
 
 .center[
-<img src="images/20260330_weekly.png" alt="fMRIPrep weekly usage" style="width: 82%; padding-top: 10pt" />
+<img src="https://github.com/nipreps/fmriprep_stats/releases/latest/download/weekly.png?v=today" alt="fMRIPrep weekly usage" style="width: 82%; padding-top: 10pt" />
 ]
 
 ???
@@ -960,7 +960,7 @@ Building that community was important for fMRIPrep: bug reports help development
 ]
 
 .center[
-<img src="images/20260330_versionstream.png" alt="fMRIPrep usage by version" style="width: 88%; padding-top: 10pt" />
+<img src="https://github.com/nipreps/fmriprep_stats/releases/latest/download/versionstream.png?v=today" alt="fMRIPrep usage by version" style="width: 88%; padding-top: 10pt" />
 ]
 
 ???
@@ -1003,6 +1003,28 @@ www.nipreps.org</a>
 NiPreps (NeuroImaging PREProcessing toolS) generalizes fMRIPrep: a framework for standardized preprocessing pipelines in neuroimaging.
 
 I often use the "sushi-grade" analogy: just like sushi-grade fish is minimally processed but safe to consume, NiPreps yields "analysis-grade" data, with minimal processing interventions but ready for direct consumption by analyses.
+
+---
+
+# The NiPreps ecosystem
+
+.center[
+<object type="image/svg+xml" data="https://www.nipreps.org/identity/nipreps-general/nipreps-chart.svg" style="width: 55%"></object><br />
+<em>NiPreps</em> (<a href="https://doi.org/10.31219/osf.io/ujxp6">Esteban et al., 2020</a>)
+]
+
+???
+
+Here's the basic architecture.
+
+It's an ecosystem of modular tools at four levels of abstraction:
+
+- End-user applications: fMRIPrep, sMRIPrep, dMRIPrep, PETPrep, and MRIQC for quality control.
+- Middleware utilities: SDCFlows, TemplateFlow, NiBabies, NiRodents, MRIQC-learn, CrowdMRI.
+- Software infrastructure: NiPype, NiBabel, NiWorkflows, NiTransforms, BIDS and PyBIDS.
+- Foundational packages the pipelines build on: AFNI, ANTs, FSL, FreeSurfer, Connectome Workbench, DIPY, ITK, Nilearn, scikit-image, scikit-learn.
+
+This is the MRI side of what WG3 wants to map across modalities.
 
 ---
 class: vcenter
