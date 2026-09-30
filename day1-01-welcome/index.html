@@ -17,6 +17,13 @@
 /* The URL resolves against remark/core/base.css, where var(--logo-url) is
    used, not against this page: hence two levels up. */
 :root { --logo-url: url("../../assets/indos-logo-left.png"); }
+
+/* Program slide: one column per day, one brand colour per day. */
+.cards.program .card.wed { border-top-color: var(--indos-turquoise); }
+.cards.program .card.thu { border-top-color: var(--indos-orange); }
+.cards.program .card.fri { border-top-color: var(--indos-lavender); }
+.cards.program .card h3 { font-size: 1.1em; }
+.cards.program .card .foot { padding-top: 0.3em; }
 </style>
 <script src="../remark/vendor/asciinema-player/asciinema-player.min.js"></script>
 <script src="https://kit.fontawesome.com/015d4b01de.js" crossorigin="anonymous"></script>
@@ -102,19 +109,72 @@ Note the change at 11:30: the hands-on is BIDSManager, with Moustafa Almanla.
 
 ---
 
-# Three days, six blocks
+# Program
 
-.boxed-content[
-<iframe src="https://www.indos-costaction.eu/training#programme-at-a-glance" style="width: 100%; height: 500px; border: 1px solid #e4e8ee; border-radius: 8px;"></iframe>
+.cards.program.rows-2.cols-3.tight.compact[
+.card.wed.accent[
+.kicker[Wednesday &middot; 09:00-13:00]
 
-.small.center[The full programme: [www.indos-costaction.eu/training](https://www.indos-costaction.eu/training)]
+### Block 1 &middot; Standards, data, environments
+
+Standardized preprocessing, BIDS across modalities, BIDSManager hands-on, containers, environment bring-up.
+
+.foot[Oscar Esteban &middot; .gray-text[you are here]]
+]
+.card.wed[
+.kicker[Wednesday &middot; 14:00-18:00]
+
+### Block 2 &middot; Environments, provenance, reading a paper
+
+Neurodesk, how to read and review a neuroimaging paper, the Journal Club in practice.
+
+.foot[Mélanie Garcia, with Steffen Bollmann (remote)]
+]
+.card.thu[
+.kicker[Thursday &middot; 09:00-13:00]
+
+### Block 3 &middot; PET, EEG/MEG and structural MRI
+
+PET and PET-BIDS, EEG/MEG preprocessing and hands-on, FreeSurfer and VBM hands-on.
+
+.foot[Martin Nørgaard, Guiomar Niso (online), Yasser Alemán-Gómez]
+]
+.card.thu[
+.kicker[Thursday &middot; 14:00-18:00]
+
+### Block 4 &middot; Diffusion MRI
+
+Diffusion MRI theory, then two hands-on sessions.
+
+.foot[Yasser Alemán-Gómez]
+]
+.card.fri[
+.kicker[Friday &middot; 09:00-13:00]
+
+### Block 5 &middot; Functional MRI: did it work?
+
+fMRI preprocessing with fMRIPrep, execution forensics, QA/QC hands-on.
+
+.foot[Lea Waller]
+]
+.card.fri[
+.kicker[Friday &middot; 14:00-18:00]
+
+### Block 6 &middot; Personal projects and closing
+
+Project pitches, project work on your own data, results, concluding remarks.
+
+.foot[All trainers]
+]
 ]
 
 ???
 
+The full programme is on the school's page: www.indos-costaction.eu/training
+
 Walk through the programme at a glance:
 
-- Wednesday: standards, data and environments (morning); environments, provenance and how to read a paper, with the Journal Club (afternoon).
+- Wednesday: standards, data and environments (morning); environments, provenance and how to read a paper, with the Journal Club (afternoon). Informal group dinner at 21:00, optional and at your own cost.
 - Thursday: PET, EEG/MEG and structural MRI (morning); diffusion MRI (afternoon).
 - Friday: functional MRI, did it work? (morning); personal projects and closing (afternoon).
 
