@@ -29,6 +29,18 @@
 .about-photo { float: left; width: 34%; }
 .about-text { float: left; width: 60%; padding-top: 1.4em; }
 .about-text ul { margin-top: 0.8em; }
+
+/* About us, the team: a small round photo beside each name. */
+.cards.team .card .team-head {
+  display: flex; align-items: center; gap: 0.7em;
+  font-family: "Montserrat", "Urbanist", sans-serif; font-weight: 600;
+  font-size: 1.15em; color: var(--accent); line-height: 1.2;
+}
+.cards.team .card img.team-photo {
+  width: 54px; height: 54px; flex: 0 0 54px;
+  border-radius: 50%; object-fit: cover; filter: grayscale(1);
+}
+.cards.team .card p { margin: 0.35em 0; }
 </style>
 <script src="../remark/vendor/asciinema-player/asciinema-player.min.js"></script>
 <script src="https://kit.fontawesome.com/015d4b01de.js" crossorigin="anonymous"></script>
@@ -330,6 +342,70 @@ School of Engineering, HES-SO Valais/Wallis
 ???
 
 Quick context: I lead *fMRIPrep* and *MRIQC* and coordinate the NiPreps community. Within INDoS, I lead Working Group 3, Automated Preprocessing Pipelines, which organizes this school.
+
+---
+
+# About us
+
+.large[
+The **trainers** and the **assistant** of this school.
+]
+
+.cards.team.brand.cols-3.tight.compact[
+.card[
+.team-head[<img class="team-photo" src="images/team-steffen.jpg" alt="Steffen Bollmann" /> Steffen Bollmann]
+
+Neurodesk, University of Queensland, Australia
+
+.foot[Wed 14:00 &middot; Neurodesk (remote)]
+]
+.card[
+.team-head[<img class="team-photo" src="images/team-avatar.jpg" alt="Mélanie Garcia" /> Mélanie Garcia]
+
+Massachusetts General Hospital, Harvard Medical School, USA
+
+.foot[Wed afternoon &middot; Reading papers, Journal Club]
+]
+.card[
+.team-head[<img class="team-photo" src="images/team-avatar.jpg" alt="Martin Nørgaard" /> Martin Nørgaard]
+
+University of Copenhagen, Denmark
+
+.foot[Thu 09:00 &middot; PET and PET-BIDS]
+]
+.card[
+.team-head[<img class="team-photo" src="images/team-avatar.jpg" alt="Yasser Alemán-Gómez" /> Yasser Alemán-Gómez]
+
+Lausanne University Hospital and University of Lausanne, Switzerland
+
+.foot[Thursday &middot; Structural and diffusion MRI]
+]
+.card[
+.team-head[<img class="team-photo" src="images/team-lea.jpg" alt="Lea Waller" /> Lea Waller]
+
+CRIUGM and Université de Montréal, Canada
+
+.foot[Fri morning &middot; fMRIPrep, QA/QC]
+]
+.card[
+.team-head[<img class="team-photo" src="images/team-avatar.jpg" alt="Daniel Martín Díez" /> Daniel Martín Díez]
+
+Complutense University of Madrid, Spain
+
+.foot[Assistant]
+]
+]
+
+???
+
+The rest of the team, in programme order:
+
+- Steffen Bollmann (Neurodesk, University of Queensland) opens this afternoon with Neurodesk, remotely from Toronto.
+- Mélanie Garcia (MGH, Harvard Medical School) leads this afternoon: how to read and review a neuroimaging paper, and the Journal Club.
+- Martin Nørgaard (University of Copenhagen) opens Thursday with PET and PET-BIDS.
+- Yasser Alemán-Gómez (CHUV and University of Lausanne) takes most of Thursday: structural MRI (FreeSurfer, VBM) and diffusion MRI.
+- Lea Waller (CRIUGM and Université de Montréal) leads Friday morning: fMRI preprocessing with fMRIPrep, execution forensics, QA/QC.
+- Daniel Martín Díez (Complutense University of Madrid) is the school's assistant.
 
 ---
 class: vcenter
