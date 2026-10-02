@@ -1,16 +1,23 @@
-# Publish the decks to GitHub Pages.
+# Publish the decks to GitHub Pages, at
+# https://www.indos-costaction.eu/wg3-ts2026-esteban/
+#
+# The site is only ever a published release: publishing a GitHub release
+# deploys that release, and pushing to main deploys nothing. The same
+# release is what Zenodo archives, so the live slides and the record with
+# the DOI are always the same version. Running the workflow by hand
+# redeploys the latest release.
 #
 # The site is the repository as it is: static HTML, no build. The workflow
 # only checks out the slide engine (the `remark` submodule) and uploads.
-# Decks are served under the organisation's domain, at
-# https://www.indos-costaction.eu/wg3-ts2026-esteban/
 #
-# Requires Settings -> Pages -> Source = "GitHub Actions".
+# Requires Settings -> Pages -> Source = "GitHub Actions", and the
+# github-pages environment must allow deployments from tags matching v*
+# (Settings -> Environments -> github-pages), since a release runs on its tag.
 name: Deploy slides
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -27,8 +34,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Always the latest full release: never a draft or a prerelease, nor an
+      # older tag published after a newer one. Fails when there is no release.
+      - name: Find the latest release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName --jq .tagName)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v4
         with:
+          ref: ${{ steps.release.outputs.tag }}
           submodules: false
 
       - name: Check out the slide engine

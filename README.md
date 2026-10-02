@@ -61,8 +61,34 @@ must be served locally to use it.
 - `tools/lint-decks.py` checks the decks for structural mistakes (slide
   separators, unbalanced content classes, missing or untracked assets).
 - `tools/deck-template.html` is the skeleton the decks were started from.
-- Pushing to `main` publishes the site through GitHub Actions
-  (`.github/workflows/pages.yml`).
+- Publishing a release deploys the site through GitHub Actions
+  (`.github/workflows/pages.yml`); see [Publishing a release](#publishing-a-release).
+
+## Publishing a release
+
+The slides on the website and the citable record on Zenodo both come from
+GitHub releases, and only from them. Publishing a release does two things:
+
+1. **Zenodo** archives the release and mints a DOI. `.zenodo.json` describes the
+   record: a *Lesson*, CC BY 4.0, with the COST acknowledgement. Zenodo only
+   archives releases published after the repository was switched on in its
+   GitHub settings.
+2. **GitHub Pages** redeploys <https://www.indos-costaction.eu/wg3-ts2026-esteban/>
+   from the release.
+
+Pushing to `main` changes neither: the published slides and the archived record
+are always the same release.
+
+To release: **Releases, Draft a new release**, a new tag `vX.Y.Z` targeting
+`main`, a couple of lines on what changed, **Publish**.
+
+After the first release, add the **concept DOI** at the top of this README and to
+`CITATION.cff` (`doi:` and `identifiers:`). It is the DOI Zenodo labels "Cite all
+versions" and always resolves to the latest release; the DOI of each release
+stays pinned to that version.
+
+`.zenodo.json` and `CITATION.cff` describe the same work twice: Zenodo reads only
+the first, GitHub's "Cite this repository" only the second. Keep them in step.
 
 ## License
 
