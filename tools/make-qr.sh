@@ -14,10 +14,6 @@ for deck in "$ROOT"/day*-*/; do
   qrencode -t SVG -o "$deck/images/qr-talk-url.svg" "$BASE/$name/"
 done
 
-# Guest Wi-Fi at the venue (CSIC Espacio Converge).
-qrencode -t SVG -o "$ROOT/day1-01-welcome/images/qr-wifi.svg" \
-  'WIFI:T:WPA;S:eventos-csic;P:2Jqv590CGfwp;;'
-
 # The Federated Journal Club.
 qrencode -t SVG -o "$ROOT/day1-01-welcome/images/qr-journal-club.svg" \
   'https://www.indos-costaction.eu/journal-club/'
