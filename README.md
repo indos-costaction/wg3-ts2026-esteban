@@ -1,5 +1,7 @@
 # INDoS WG3 Training School 2026: standards, data, environments
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23162294.svg)](https://doi.org/10.5281/zenodo.23162294)
+
 Slides for **Block 1** (Wednesday 30 September 2026, 09:00-13:00) of the
 **[INDoS WG3 Training School](https://www.indos-costaction.eu/training)**,
 Madrid, 30 September to 2 October 2026, run by Working Group 3 (Automated
