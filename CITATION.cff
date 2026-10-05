@@ -13,6 +13,11 @@ authors:
     given-names: "Oscar"
     affiliation: "HES-SO Valais-Wallis, Sion, Switzerland"
     orcid: "https://orcid.org/0000-0001-8435-6191"
+doi: 10.5281/zenodo.23162294
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23162294
+    description: "Concept DOI: all versions, resolves to the latest release."
 license: CC-BY-4.0
 repository-code: "https://github.com/indos-costaction/wg3-ts2026-esteban"
 url: "https://www.indos-costaction.eu/wg3-ts2026-esteban/"
