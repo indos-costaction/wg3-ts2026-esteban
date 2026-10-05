@@ -1,0 +1,48 @@
+{
+  "upload_type": "lesson",
+  "title": "INDoS WG3 Training School 2026: standards, data, environments (slides)",
+  "description": "<p>Slides on standardized preprocessing with fMRIPrep as the reference model, the Brain Imaging Data Structure across modalities, and containers, with the welcome and introduction to INDoS and its Working Group 3, prepared for the Training School of Working Group 3 of the INDoS COST Action (CA24161), Madrid, 30 September to 2 October 2026.</p><p>The slides are served at <a href=\"https://www.indos-costaction.eu/wg3-ts2026-esteban/\">www.indos-costaction.eu/wg3-ts2026-esteban</a>. They run on <a href=\"https://github.com/oesteban/remark-engine\">remark-engine</a>, included in the repository as a git submodule and therefore not part of this archive: clone the repository with <code>git clone --recurse-submodules</code> to run them locally.</p>",
+  "creators": [
+    {
+      "name": "Esteban, Oscar",
+      "affiliation": "HES-SO Valais-Wallis, Sion, Switzerland",
+      "orcid": "0000-0001-8435-6191"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "keywords": [
+    "neuroimaging",
+    "preprocessing",
+    "fMRIPrep",
+    "BIDS",
+    "containers",
+    "reproducibility",
+    "training materials",
+    "INDoS",
+    "COST Action CA24161"
+  ],
+  "notes": "This publication is based upon work from COST Action CA24161 (INDoS), supported by COST (European Cooperation in Science and Technology).",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/indos-costaction/wg3-ts2026-esteban",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://www.indos-costaction.eu/wg3-ts2026-esteban/",
+      "relation": "isVariantFormOf",
+      "resource_type": "presentation"
+    },
+    {
+      "identifier": "https://www.indos-costaction.eu/wg3-ts2026",
+      "relation": "isPartOf",
+      "resource_type": "event"
+    },
+    {
+      "identifier": "https://github.com/oesteban/remark-engine",
+      "relation": "requires",
+      "resource_type": "software"
+    }
+  ]
+}
